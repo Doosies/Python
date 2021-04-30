@@ -26,7 +26,7 @@ class Snake:
 class Box:
     def __init__(self):
         self.font = pygame.font.Font('Gulim.ttf',30)  #폰트 설정
-        text = self.font.render("글자출력",True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
+        # text = self.font.render("글자출력",True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
     def renderText(self,screen):
         background.blit(screen.text,(870,20))              #화면에 표시 
 
@@ -81,27 +81,26 @@ def main():
     screenSize = [boardSize[0] * boxSize, boardSize[1] * boxSize]
     screen = pygame.display.set_mode(screenSize)
     pygame.display.set_caption("Title")
+    pygame.font.SysFont()
 
     done = False
     clock = pygame.time.Clock()
     game = Game(boxSize, boardSize)
     prevKeyDown =  0
 
-    test = Box()
+    # test = Box()
 
     while not done:
         clock.tick(60)
-
         for event in pygame.event.get():
-
             if event.type == pygame.QUIT:
                 dome = True
             if event.type == pygame.KEYDOWN and event.key != prevKeyDown:
-                if event.key == pygame.K_LEFT != 0:
+                if event.key == pygame.MOUSEBUTTONDOWN != 0:
                     game.setSnakeDirection([-1,0])
                 elif event.key == pygame.K_RIGHT:
                     game.setSnakeDirection([1,0])
-                elif event.key == pygame.K_UP:
+                elif event.key == pygame.K_
                     game.setSnakeDirection([0,-1])
                 elif event.key == pygame.K_DOWN:
                     game.setSnakeDirection([0,1])
@@ -109,6 +108,6 @@ def main():
 
         screen.fill(Color.WHITE)
         game.drawGame(screen)
-        test.renderText()
         pygame.display.flip()
+        pygame.Color()
 main()
