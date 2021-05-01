@@ -1,13 +1,4 @@
-# a, b = map(int, input().split())
 a = input()
 a = int(a)
-if a >= 90:
-    print("A")
-elif a >= 80:
-    print("B")
-elif a >= 70:
-    print("C")
-elif a >= 60:
-    print("D")
-else:
-    print("F")
+if (a % 4 == 0) and ((a % 100 != 0) or (a % 400 == 0)):
+    print("윤년")
