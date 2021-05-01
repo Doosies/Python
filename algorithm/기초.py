@@ -1,5 +1,5 @@
-import sys
-n, x = map(int, input().split())
-a = map(int,sys.stdin.readline().split())
-result = [str(val) for val in a if val < x]
-print(" ".join(result))
+a = b = 1
+while a!=0 and b!=0:
+    a, b = map(int,input().split())
+    if a!=0 and b!=0:
+        print(a+b)
