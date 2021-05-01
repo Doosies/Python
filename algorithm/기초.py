@@ -4,6 +4,6 @@ nl = []
 # h, m = map(int, input().split())
 for i in range(n):
     a, b = map(int, input().split())
-    nl.append(a+b)
+    nl.append([a,b])
 for i,v in enumerate(nl):
-    print(f'Case #{i+1}: {v}')
+    print(f'Case #{i+1}: {v[0]} + {v[1]} = {v[0]+v[1]}')
