@@ -1,9 +1,7 @@
 n = int(input())
-add_list = []
+add = 0
 # m = int(input())
 # h, m = map(int, input().split())
-for i in range(n):
-    a, b = map(int, input().split())
-    add_list.append(a+b)
-for v in add_list:
-    print(v)
+for i in range(1, n+1):
+    add += i
+print(add)
