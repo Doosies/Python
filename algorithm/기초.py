@@ -1,4 +1,13 @@
-a = input()
-a = int(a)
-if (a % 4 == 0) and ((a % 100 != 0) or (a % 400 == 0)):
-    print("윤년")
+a = int(input())
+b = int(input())
+
+if a > 0:
+    if b > 0:
+        print("1")
+    else:
+        print("4")
+else:
+    if b > 0:
+        print("2")
+    else:
+        print("3")
