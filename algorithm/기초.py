@@ -45,7 +45,7 @@ def get_users_action(p_list, n):
             print(users_actions, end='\n')
     return users_actions
 
-# 승자 한명 반환
+# 승자 한명 반환666
 def get_winner_loser(users_dict):
     # a, b, c가 모두 겹치지 않을떄
     # 리턴되는 값은 winner_list, loser_list
