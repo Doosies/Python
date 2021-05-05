@@ -1,5 +1,15 @@
 n = int(input())
-subject_list = list(map(int, input().split()))
-max_num = max(subject_list)
-new_subject_list = [val/max_num*100 for val in subject_list]
-print(sum(new_subject_list) / len(new_subject_list))
+ox = list(input() for _ in range(n))
+
+for i,v in enumerate(ox):
+    before = ''
+    now = ''
+    score = 0
+    plus = 1
+    for val in ox[i]:
+        now = val
+        if val == 'O':
+            plus = plus + 1 if before == 'O' else 1
+            score += plus
+        before = now
+    print(score)
