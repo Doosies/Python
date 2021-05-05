@@ -1,95 +1,118 @@
 import random
+
 q = 3
 q2 = 1
 qq = [
-    [1,   0,    0],
-    [0,   0,    1], 
-    [0,   0,    1]
+    [0.5, 0.5, 0],
+    [0.5, 0, 0.5], 
+    [0, 0.5, 0.5],
+    [0.5, 0.5, 0],
+    [0.5, 0, 0.5], 
+    [0, 0.5, 0.5],
+    [0.5, 0.5, 0],
+    [0.5, 0, 0.5], 
+    [0, 0.5, 0.5],
     ]
 n, k = [q,q2]
+# n, k = map(int, input().split())
+rank = []
 users_percentage_list = []
+cnt = 0
+
 for i in range(n):
         # a, b, c = map(float, input().split())
         a, b, c = [qq[i][0],qq[i][1],qq[i][2]]
         user_action_percentage = {'a':a, 'b':b, 'c':c}
         percentage_actions = sorted(user_action_percentage.items(), key=lambda x: x[1])
-        user_dict = {'user':i, 'action':percentage_actions}
+        user_dict = {'user':i, 'action':percentage_actions, 'randper':0}
         users_percentage_list.append(user_dict)
-
 # def get_users_percentage_list():
 #     percentage_list = []
     
 #     return percentage_list
 
     
-# 모든 유저의 액션 설정
-def get_users_action(p_list, n):
+# 인자로 들어온 유저들의 액션 설정
+def get_users_action(p_list):
     users_actions = {'a':[], 'b':[], 'c':[]}
     while True:
-        for i in range(n):
+        users_list = []
+        for original_user_dict in users_percentage_list:
+            for input_user in p_list:
+                if original_user_dict['user'] == input_user:
+                    users_list.append(original_user_dict)
+                    # users_percentage_list[original_user_dict['user']]['randper'] = 0
+        # 현재 유조 목록
+        for user in users_list:
             add_user_rand = 0.0
-            # 유저 한명의 액션 설정
-            for j,_ in enumerate(p_list):
-                rand = round(random.random(),3)
-                add_user_rand += p_list[i]['action'][j][1]
-                # 랜덤값 찾으면
+            # print(users_percentage_list[user['user']])
+            # users_percentage_list[user['user']]['randper'] = 0 
+            # 유저 안에 action 목록
+            for action in user['action']:
+                rand = round(random.random(), 3)
+                add_user_rand += action[1]
                 if rand < add_user_rand:
-                    user_action = p_list[i]['action'][j][0]
-                    user = {'user':i, 'action':user_action}
-                    users_actions[user_action].append(user)
-                    print(users_actions)
+                    user_action = action[0]
+                    user_name = user['user']
+                    users_actions[user_action].append(user_name)
+                    if users_percentage_list[user_name]['randper'] == 0:
+                        users_percentage_list[user_name]['randper'] += action[1]
+                        print(user_name,"더함!")
+                    else:
+                        users_percentage_list[user_name]['randper'] *= action[1]
+                        print(user_name, "곱함")
                     break
-        if not (users_actions['a'] and users_actions['b'] and users_actions['c']):
+
+        if ((users_actions['a'] and users_actions['b'] 
+        or users_actions['b'] and users_actions['c'] 
+        or users_actions['c'] and users_actions['a'])
+        and not(users_actions['a'] and users_actions['b'] and users_actions['c'])):
             break
         else:
-            print(users_actions, end='\n')
+            users_actions = {'a':[], 'b':[], 'c':[]}
+            # for user in users_percentage_list:
+            #     users_percentage_list[user['user']]['randper'] = 0
+        # time.sleep(1.0)
     return users_actions
 
 # 승자 한명 반환666
-def get_winner_loser(users_dict):
+def get_winner_loser(users_list):
     # a, b, c가 모두 겹치지 않을떄
     # 리턴되는 값은 winner_list, loser_list
     # a는 b를 이김
-    if users_dict['a'] and users_dict['b']:
-        return [users_dict['a'], users_dict['b']]
+    # if users_dict['a'] and users_dict['b'] and users_dict['c']:
+    if users_list['a'] and users_list['b']:
+        return [users_list['a'], users_list['b']]
     # b는 c를 이김
-    elif users_dict['b'] and users_dict['c']:
-        return [users_dict['b'], users_dict['c']]
+    if users_list['b'] and users_list['c']:
+        return [users_list['b'], users_list['c']]
     # c는 a를 이김
-    elif users_dict['c'] and users_dict['a']:
-        return [users_dict['c'], users_dict['a']]
-    else: 
-        return None
+    if users_list['c'] and users_list['a']:
+        return [users_list['c'], users_list['a']]
 
 def dfs_win(actions):
+    users_actions = []
+    action = get_users_action(actions)
+    # winner, loser = get_winner_loser(action)
+    winner_and_loser = get_winner_loser(action)
+    for kind in winner_and_loser:
+        users_actions = []
+        if len(kind) > 1:
+            for user in kind:
+                users_actions.append(user)
+            action = get_users_action(users_actions)
+            dfs_win(users_actions)
+        else:
+            rank.append(kind[0])
     
-    winner, loser = get_winner_loser(actions)
-    if len(winner) > 1:
-        print("2명이상이 이김")
-    if len(loser) > 1:
-        print("2명 이상이 짐")
-    print(winner)
-    print(loser)
-# def main():
-    # n = 참가자, k = 등수
-    # n, k = map(int, input().split())
-    # percentage_list = get_percentage_list(n)
-    # actions = get_users_action(percentage_list, n )
-    # winners, losers = get_winner_loser(actions)
-
-actions = get_users_action(users_percentage_list, n)
-dfs_win(actions)
-# percentage_list = get_users_percentage_list()
-# print(users_percentage_list)
-# dfs_win(winners,n)
-# main()
-
-# 1. 현재 입력된 사람 목록과 확률을 가져옴.
-# 2. 1에서 입력된 사람들이 뭘 낼지 정함
+    if len(winner_and_loser[0]) == 1 and len(winner_and_loser[1]) == 1:
+        return
 
 
-# 3. 낸걸로 승, 패를 나눔
-# 4. 승 그룹이 2명 이상이면 재귀
-# 4-1. 승 그룹이 1명이면 그 사람을 랭크에 추가
-# 5. 패 그룹이 2명 이상이면 재귀
-# 5-1. 패 그룹이 1명이면 그 사람을 랭크에 추가하고 리턴해줌.
+users = list(range(n))
+dfs_win(users)
+print("rank - > ", rank)
+per = [percentage['randper'] for percentage in users_percentage_list]
+for val in per:
+    print(f'{val:0.20f}', end=' ')
+print(sum(per))
