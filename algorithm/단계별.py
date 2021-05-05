@@ -13,5 +13,4 @@ def isSeq(num):
 for i in range(1,n+1):
     if isSeq(i) == True or i < 100:
         cnt +=1
-        print(i)
 print(cnt)
