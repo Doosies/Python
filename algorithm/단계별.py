@@ -1,4 +1,8 @@
-n = int(input())
-n2 = input()
-n3 = sum([int(i) for i in n2])
-print(n3)
+S = input()
+rst = []
+for i in range(97,123):
+    if chr(i) in S:
+        rst.append(str(S.index((chr(i)))))
+    else:
+        rst.append('-1')
+print(' '.join(rst))
