@@ -1,4 +1,4 @@
-n = list(int(input()) for _ in range(9))
-maxNum = max(n)
-print(maxNum)
-print(n.index(maxNum)+1)
+a, b, c = list(int(input()) for _ in range(3))
+result = str(a * b * c)
+for i in range(10):
+    print(result.count(f'{i}'))
