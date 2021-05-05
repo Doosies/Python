@@ -1,4 +1,4 @@
-import sys
-n = int(input())
-num = list(map(int, sys.stdin.readline().split()))
-print(min(num),max(num))
+n = list(int(input()) for _ in range(9))
+maxNum = max(n)
+print(maxNum)
+print(n.index(maxNum)+1)
