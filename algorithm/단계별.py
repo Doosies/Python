@@ -1,9 +1,11 @@
-T = int(input())
-R = [input().split() for _ in range(T)]
-P = [ [result * int(r[0]) 
-      for result in r[1]] 
-      for r in R
-    ]
-for i in P:
-    pt = ''.join(i[:])
-    print(pt)
+n = input().upper()
+m = {}
+for char in n:
+    m[char] = n.count(char)
+    n.strip(char)
+    
+if len(set(m.values())) != len(m.values()):
+    print("?")
+else:
+    sort = sorted(m.items(), key=lambda x: x[1])
+    print(sort[-1][0])
