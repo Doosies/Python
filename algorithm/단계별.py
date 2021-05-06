@@ -1,3 +1,8 @@
-a, b, c = map(int, input().split())
-a = a / (c-b) + 1 if c > b else -1
-print(int(a))
+i = 1
+x = int(input()) - i
+while True:
+    if x <= 0:
+        break
+    x -= i * 6
+    i += 1
+print(i)
