@@ -1,18 +1,15 @@
+# t개의 테스트 데이터
+# h 층수
+# w 방개수, w는 필요없어
+# n 번째 도착 손님
 import math
+t = int(input())
+t2 = [list(map(int,input().split())) for _ in range(t)]
 
-a, b, c = map(int, input().split())
-
-# 10 - 2 + 1
-# a,b,c = [5,1,6]
-print(math.ceil((c-a)/(a-b))+1)
-# now = 0
-# day = 0
-
-# while True:
-#     day += 1
-#     now += a
-#     if now >= c:
-#         break
-#     now -= b
-# print(day)
+for h,w,n in t2:
+    result_w = str(math.ceil(n/h))
+    result_h = h if n % h == 0 else n % h
+    if len(result_w) == 1:
+        result_w = '0'+result_w
+    print(f'{result_h}{result_w}')
 
