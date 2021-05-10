@@ -1,3 +1,4 @@
+# 소수 개수 구하기
 from math import sqrt,floor
 n = int(input())
 li = map(int, input().split())
