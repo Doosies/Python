@@ -1,16 +1,14 @@
 from math import sqrt, floor
 
 a, b = map(int, input().split())
-li = []
-def is_decimal(num):
-    for i in range(2, floor(sqrt(num))+1 ):
-        if num % i == 0:
-            return False
-    return True
+prime = [True] * (b+1)
+prime[1] = False
 
-for i in range(a,b+1):
-    if is_decimal(i) and i > 1:
-        li.append(i)
+for i in range( 2, b+1):
+    if prime[i]:
+        for j in range( i*2, b + 1, i):
+            prime[j] = False
 
-for v in li:
-    print(v)         
+for i in range(a, b+1):
+    if prime[i]:
+        print(i)
