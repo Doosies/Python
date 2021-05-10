@@ -1,15 +1,21 @@
-# 소수 개수 구하기
 from math import sqrt,floor
-n = int(input())
-li = map(int, input().split())
-cnt = 0
 
-for i in li:
-    if i == 1:
-        cnt += 1
-    else:
-        for j in range(2, floor(sqrt(i))+1):
-            if i % j == 0:
-                cnt += 1
-                break
-print(n-cnt)
+start = int(input())
+end = int(input())
+li = []
+
+def is_decimal(num):
+    for i in range(2, floor(sqrt(num))+1 ):
+        if num % i == 0:
+            return False
+    return True
+
+for i in range(start, end+1):
+    if is_decimal(i) and i > 1:
+        li.append(i)
+
+if len(li) == 0:
+    print(-1)
+else:
+    print(sum(li))
+    print(min(li))
