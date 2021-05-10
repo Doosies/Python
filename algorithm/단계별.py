@@ -1,21 +1,17 @@
-from math import sqrt,floor
+from math import sqrt, floor
 
-start = int(input())
-end = int(input())
-li = []
-
-def is_decimal(num):
+def get_num(num):
+    result = []
     for i in range(2, floor(sqrt(num))+1 ):
-        if num % i == 0:
-            return False
-    return True
+        while num % i == 0:
+            result.append(i)
+            num = num / i
+    if num > 1:
+        result.append(int(num))
 
-for i in range(start, end+1):
-    if is_decimal(i) and i > 1:
-        li.append(i)
+    return result
 
-if len(li) == 0:
-    print(-1)
-else:
-    print(sum(li))
-    print(min(li))
+num = int(input())
+if num > 1:
+    for i in get_num(num):
+        print(i)
