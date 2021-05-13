@@ -1,5 +1,15 @@
 import sys
-x,y,w,h = map(int, sys.stdin.readline().split())
-near_x = w-x if w-x < x else x
-near_y = h-y if h-y < y else y
-print(min([near_x, near_y]))
+
+def find(num):
+    if num[0] == num[1]:
+        return num[2]
+    elif num[1] == num[2]:
+        return num[0]
+    else:
+        return num[1]
+
+points = [sys.stdin.readline().split() for _ in range(3)]
+x = [p[0] for p in points]
+y = [p[1] for p in points]
+
+print(find(x), find(y))
