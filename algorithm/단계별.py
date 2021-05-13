@@ -1,15 +1,12 @@
 import sys
 
-def find(num):
-    if num[0] == num[1]:
-        return num[2]
-    elif num[1] == num[2]:
-        return num[0]
+while True:
+    t = list(map(int, sys.stdin.readline().split()))
+    if sum(t) == 0:
+        break
     else:
-        return num[1]
-
-points = [sys.stdin.readline().split() for _ in range(3)]
-x = [p[0] for p in points]
-y = [p[1] for p in points]
-
-print(find(x), find(y))
+        t = sorted(t)
+        if t[0] **2 + t[1] **2 == t[2] **2:
+            print("right")
+        else:
+            print("wrong")
