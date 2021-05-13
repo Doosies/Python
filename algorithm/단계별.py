@@ -1,14 +1,21 @@
 from math import sqrt, floor
 
-a, b = map(int, input().split())
-prime = [True] * (b+1)
-prime[1] = False
+inp = []
+while True:
+    n = int(input())
+    if n == 0:
+        break
+    inp.append(n)
 
-for i in range( 2, b+1):
+max_inp = max(inp)*2
+prime = [True] * (max_inp+1)
+for i in range( 2, int(max_inp**0.5)+1):
     if prime[i]:
-        for j in range( i*2, b + 1, i):
+        for j in range( i*2, max_inp, i):
             prime[j] = False
 
-for i in range(a, b+1):
-    if prime[i]:
-        print(i)
+for i in inp:
+    if i == 1:
+        print("1")
+    else:
+        print(sum(prime[i+1:2*i]))
