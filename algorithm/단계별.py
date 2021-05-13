@@ -12,14 +12,13 @@ for i in range( 2, int(max_inp**0.5)+1):
 
 for i in inp:
     now = prime[:i+1]
-    primes = [j for j in range(1,i+1) if now[j]== True]
-    half = int(len(primes)/2) - 1
+    primes = [j for j in range(int(i/2)-1,i+1) if now[j]== True]
     before_minus = i*2
     before_li = []
-    for j in range(half, len(primes)):
-        minus = i - primes[j]
-        now_prime = primes[j]
-        if minus in primes:
+    for now_prime in primes:#range(len(primes)):
+        minus = i - now_prime
+        now_prime = now_prime
+        if prime[minus] == True:# in prime:
             now = [minus, now_prime]
             sort_now = [min(now), max(now)]
             if sort_now[1] - sort_now[0] >= before_minus:
