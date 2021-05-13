@@ -1,12 +1,4 @@
-import sys
-
-while True:
-    t = list(map(int, sys.stdin.readline().split()))
-    if sum(t) == 0:
-        break
-    else:
-        t = sorted(t)
-        if t[0] **2 + t[1] **2 == t[2] **2:
-            print("right")
-        else:
-            print("wrong")
+import math
+r = int(input())
+print(f'{r**2*math.pi:.6f}')
+print(f'{r**2*2:.6f}')
