@@ -1,22 +1,24 @@
-# n = int(input())
+import sys 
+# sys.setrecursionlimit(10**6) 
+
+def append_star(LEN): 
+    if LEN == 1: 
+        return ['*']
+        
+    Stars = append_star(LEN//3) 
+    print(Stars)
+    L = [] 
+    
+    for S in Stars: 
+        L.append(S*3) 
+    for S in Stars: 
+        L.append(S+' '*(LEN//3)+S) 
+    for S in Stars: 
+        L.append(S*3) 
+    return L 
+    
 n = int(input())
-li = [[' '] * n for _ in range(n)]
-
-def solve(y, x, size):
-    if size == 1:
-        li[y][x] = '*'
-        return
-    div = size // 3
-    cnt = 0
-    for i in range(3):
-        for j in range(3):
-            cnt += 1
-            if cnt != 5:
-                solve( y+i*div, x+j*div, div)
-
-
-solve(0,0,n)
-for y in range(n):
-    for x in range(n):
-        print(li[y][x], end='')
-    print()
+# append_star(n)
+print('\n'.join(append_star(n)))
+# for i in append_star(n):
+#     print(i)
