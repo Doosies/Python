@@ -1,8 +1,22 @@
+# n = int(input())
 n = int(input())
-dp = [0,0,1,1]
+li = [[' '] * n for _ in range(n)]
 
-for i in range(4, n+1):
-    dp.append(dp[i-1]+1)
-    if i % 2 == 0:  dp[i] = min(dp[i//2]+1, dp[i])
-    if i % 3 == 0:  dp[i] = min(dp[i//3]+1, dp[i])
-print(dp[n])
+def solve(y, x, size):
+    if size == 1:
+        li[y][x] = '*'
+        return
+    div = size // 3
+    cnt = 0
+    for i in range(3):
+        for j in range(3):
+            cnt += 1
+            if cnt != 5:
+                solve( y+i*div, x+j*div, div)
+
+
+solve(0,0,n)
+for y in range(n):
+    for x in range(n):
+        print(li[y][x], end='')
+    print()
