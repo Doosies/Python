@@ -1,16 +1,15 @@
-import sys; read = sys.stdin.readline()
-n = int(read)
-print((2**n)-1)
+n, m = map(int, input().split())
+cards = list(map(int, input().split()))
+# n, m = 5, 21
+# cards = 5, 6, 7, 8, 9
+result = []
 
-def solve(n, start, to, via):
-    if n == 1:
-        print("종료", start, to)
-        return
-    else:
-        solve(n-1, start, via, to)
-        print("진행", start, to)
-        solve(n-1, via, to, start)
-solve(n,1,3,2)
-
+for i,v in enumerate(cards):
+    for j in range(i):
+        for k in range(j):
+            re = cards[i]+cards[j]+cards[k]
+            if re <= m:
+                result.append(re)
+print(max(result))
 
 
