@@ -1,18 +1,14 @@
 n = int(input())
-n_len = len(list(str(n)))
+inp = [input().split() for _ in range(n)]
+rank = [1] * len(inp)
+end = len(inp)
 
-result = 0
-start = 0
-if n >= 18:
-    start = int(n - n_len * 9)
+for i in range(end):
+    for j in range(i+1,end):
+        if inp[i][0] > inp[j][0] and inp[i][1] > inp[j][1]:
+            rank[j] += 1
+        elif inp[i][0] < inp[j][0] and inp[i][1] < inp[j][1]:
+            rank[i] += 1
 
-
-
-for i in range(start, n-1):
-    num = list(str(i))
-    num = list(map(int,num))
-    if n == sum(num) + i:
-        result = i
-        break
-
-print(result)
+rank = " ".join([str(_) for _ in rank])
+print(rank)
