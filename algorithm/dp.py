@@ -1,24 +1,16 @@
-import sys 
-# sys.setrecursionlimit(10**6) 
+import sys; read = sys.stdin.readline()
+n = int(read)
+print((2**n)-1)
 
-def append_star(LEN): 
-    if LEN == 1: 
-        return ['*']
-        
-    Stars = append_star(LEN//3) 
-    print(Stars)
-    L = [] 
-    
-    for S in Stars: 
-        L.append(S*3) 
-    for S in Stars: 
-        L.append(S+' '*(LEN//3)+S) 
-    for S in Stars: 
-        L.append(S*3) 
-    return L 
-    
-n = int(input())
-# append_star(n)
-print('\n'.join(append_star(n)))
-# for i in append_star(n):
-#     print(i)
+def solve(n, start, to, via):
+    if n == 1:
+        print("종료", start, to)
+        return
+    else:
+        solve(n-1, start, via, to)
+        print("진행", start, to)
+        solve(n-1, via, to, start)
+solve(n,1,3,2)
+
+
+
