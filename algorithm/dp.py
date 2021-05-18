@@ -1,15 +1,18 @@
-n, m = map(int, input().split())
-cards = list(map(int, input().split()))
-# n, m = 5, 21
-# cards = 5, 6, 7, 8, 9
-result = []
+n = int(input())
+n_len = len(list(str(n)))
 
-for i,v in enumerate(cards):
-    for j in range(i):
-        for k in range(j):
-            re = cards[i]+cards[j]+cards[k]
-            if re <= m:
-                result.append(re)
-print(max(result))
+result = 0
+start = 0
+if n >= 18:
+    start = int(n - n_len * 9)
 
 
+
+for i in range(start, n-1):
+    num = list(str(i))
+    num = list(map(int,num))
+    if n == sum(num) + i:
+        result = i
+        break
+
+print(result)
