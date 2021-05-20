@@ -23,31 +23,45 @@ board = [input() for _ in range(m)]
 # WWWWWWWWWWBWB"""
 
 
-# board = board.split("\n")
+board = board.split("\n")
 result = m*n
-def func(check_val, a, b, k, l):
-    cnt = 0
-    if k % 2 == 0:
-        if l % 2 == 0:
-            if check_val != a: cnt += 1
-        else:
-            if check_val != b: cnt += 1
-    else:
-        if l % 2 == 0:
-            if check_val != b: cnt += 1
-        else:
-            if check_val != a: cnt += 1
-
-    return cnt
+# def func(check_val, a, b, k, l):
+#     cnt = 0
+#     if k % 2 == 0:
+#         if l % 2 == 0:
+#             if check_val != a: cnt += 1
+#         else:
+#             if check_val != b: cnt += 1
+#     else:
+#         if l % 2 == 0:
+#             if check_val != b: cnt += 1
+#         else:
+#             if check_val != a: cnt += 1
+    
+#     return cnt
 
 for i in range(m-8 +1):
     for j in range(n-8 +1):
         cnt1 = 0
         cnt2 = 0
+
         for k in range(i,i+8):
+            if k % 2 == 0:
+                tmp1 = 'W'
+                tmp2 = 'B'
+            else:
+                tmp1 = 'B'
+                tmp2 = 'W'
+                
             for l in range(j,j+8):
-                cnt1 += func(board[k][l], 'W', 'B', k, l)
-                cnt2 += func(board[k][l], 'B', 'W', k, l)
+                now = board[k][l]
+                if l % 2 == 0:
+                    if now != tmp1: cnt1+=1
+                    if now != tmp2: cnt2+=1
+                else:
+                    if now == tmp1: cnt1+=1
+                    if now == tmp2: cnt2+=1
+                
         result = min(result, min(cnt1, cnt2))
 print(result)
 
