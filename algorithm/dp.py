@@ -1,39 +1,28 @@
 import sys; read = sys.stdin.readline
+# 힙생성 알고리즘
+# heap = [6,3,2,10,7,5,9,1,4,8]
+hp = [7,6,5,4,3,2,1]
+hp.insert(0,0)
+print("전  -> ", hp)
+        
+isEnd = False
 
-n = int(read().rstrip())
-num = [int(read().rstrip()) for _ in range(n)]
-# num = [6, 5, 3, 1, 8, 7, 2, 4, 9,10]
+def heapify(size, i):
+    c = i*2 # 왼쪽선택
+    print("함수실행")
+    # 오른쪽이 존재하면서 오른쪽이 크면
+    if c+1 < size and hp[c] < hp[c+1]:
+        c += 1 #오른쪽 선택
+        
+    # 부모보다 자식이 더 크면 둘이 바꿈
+    if c < size and hp[i] < hp[c]:
+        hp[i], hp[c] = hp[c], hp[i]
+        print("노드교체")
+    # 바꾼곳의 노드 위치가 맨 아래가 아닐경우
+    if c < (size) // 2 :
+        heapify(size, c)
 
-def merge(left, right):
-    sorted_li = []
-    left_idx, right_idx = 0, 0
-    while left_idx < len(left) and right_idx < len(right):
-        if left[left_idx] < right[right_idx]:
-            sorted_li.append(left[left_idx])
-            left_idx += 1
-        else:
-            sorted_li.append(right[right_idx])
-            right_idx += 1
-    while left_idx < len(left):
-        sorted_li.append(left[left_idx])
-        left_idx += 1
+for i in range( (len(hp)) //2, 0, -1):
+    heapify(len(hp), i)
 
-    while right_idx < len(right):
-        sorted_li.append(right[right_idx])
-        right_idx += 1
-
-    return sorted_li
-
-def merge_sort(arr):
-    if len(arr) == 1:
-        return arr
-    
-    mid = len(arr)//2
-    left = merge_sort(arr[:mid])
-    right = merge_sort(arr[mid:])
-    
-    return merge(left, right)
-    
-
-a = merge_sort(num)
-print("\n".join(map(str,a)))
+print("후  -> ", hp)
