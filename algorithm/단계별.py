@@ -1,11 +1,11 @@
 import sys; read = sys.stdin.readline
-from collections import Counter
 
-n = int(read()) # 입력되는값, 홀수
-num_li = sorted([int(read()) for _ in range(n)])
-cnt = Counter(num_li).most_common(2)
+cnt = [0 for _ in range(10)]
+n = read().rstrip()
 
-print(round(sum(num_li) / n))
-print(num_li[n//2])
-print(cnt[-1][0] if cnt[0][1] == cnt[-1][1]  else cnt[0][0])
-print(max(num_li)-min(num_li))
+for i in n:
+    cnt[int(i)] += 1
+    
+for i in range(9,-1,-1):
+    for j in range(cnt[i]):
+        print(i,end='')
