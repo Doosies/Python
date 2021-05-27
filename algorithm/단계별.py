@@ -1,7 +1,14 @@
 import sys; read = sys.stdin.readline
 
-n = int(read())
-num = list(map(int, read().split()))
-num_dict = {v:i for i,v in enumerate(sorted(set(num)))}
-for i in num:
-    print(num_dict[i], end=' ')
+def solv(now):
+    if len(now) >= m:
+        print(" ".join(map(str,now)))
+        return now
+    for i in range(1, n+1):
+        if i not in now:
+            now.append(i)
+            solv(now)
+            now.pop()
+
+n, m = map(int, read().split())
+solv([])
