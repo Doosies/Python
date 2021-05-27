@@ -1,11 +1,7 @@
 import sys; read = sys.stdin.readline
 
-cnt = [0 for _ in range(10)]
-n = read().rstrip()
+n = int(read())
+pos = [list(map(int,read().split())) for _ in range(n)]
 
-for i in n:
-    cnt[int(i)] += 1
-    
-for i in range(9,-1,-1):
-    for j in range(cnt[i]):
-        print(i,end='')
+for i in sorted(pos, key=lambda x: (x[0], x[1])):
+    print(i[0], i[1])
