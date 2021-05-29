@@ -1,14 +1,21 @@
-import sys; read = sys.stdin.readline
-from itertools import permutations, combinations, product
+n = int(input())
+check_row = [False] * n
+check_left_up = [False] * (2*n -1)
+check_right_up = [False] * (2*n -1)
+cnt = 0
 
-n, m = map(int, read().split())
-def solve(now):
-    if len(now) >= m:
-        print(" ".join(map(str,now)))
+def chess(row):
+    if row == n:
+        global cnt
+        cnt += 1
         return
-    for i in range(1,n+1):
-        if len(now) == 0 or i >= now[-1]:
-            now.append(i)
-            solve(now)
-            now.pop()
-solve([])
+    for col in range(n):
+        if (not check_row[col] 
+        and not check_left_up[(n-1)+(row-col)]
+        and not check_right_up[(row+col)]):
+            check_row[col] = check_left_up[(n-1)+(row-col)] = check_right_up[row+col] = True
+            chess(row+1)
+            check_row[col] = check_left_up[(n-1)+(row-col)] = check_right_up[row+col] = False
+
+chess(0)
+print(cnt)
