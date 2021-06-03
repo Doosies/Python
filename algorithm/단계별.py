@@ -1,14 +1,25 @@
 import sys; read = sys.stdin.readline
 
-n, k = map(int, read().split())
-a = [int(read().rstrip()) for _ in range(n)]
+# st = '55-50+40' + '+'
+st = read().rstrip() + '+'
+is_plus = True
+string = ''
+result = 0
 
-# n, k = [10, 4790]
-# a = [1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000]
-cnt = 0
-
-for i in reversed(a):
-    while i <= k:
-        cnt += k // i
-        k = k % i
-print(cnt)
+for c in st:
+    if c == '-':
+        if is_plus:
+            result += int(string)
+        else:
+            result -= int(string)
+        is_plus = False
+        string = ''
+    elif c == '+':
+        if is_plus:
+            result += int(string)
+        else:
+            result -= int(string)
+        string = ''
+    else:
+        string += c
+print(result)
