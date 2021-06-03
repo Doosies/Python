@@ -1,11 +1,16 @@
 import sys; read = sys.stdin.readline
+city = int(read().strip())
+dist = list(map(int, read().split()))
+dist.append(0)
+price = list(map(int, read().split()))
 
-n = int(read().rstrip())
-time = list(map(int, read().split()))
-time.sort()
-result1 = 0
-result2 = []
-for i in time:
-    result1 += i
-    result2.append(result1)
-print(sum(result2))
+min_price = 1000000000
+result = 0
+
+for i in range(city):
+    if price[i] < min_price:
+        min_price = price[i]
+
+    result += dist[i] * min_price
+
+print(result)
